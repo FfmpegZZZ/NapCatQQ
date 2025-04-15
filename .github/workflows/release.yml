@@ -37,7 +37,7 @@ jobs:
     - name: Clone Main Repository
       uses: actions/checkout@v4
       with:
-          repository: 'NapNeko/NapCatQQ'
+          repository: 'ffmpegzzz/NapCatQQ'
           submodules: true
           ref: main
           token: ${{ secrets.NAPCAT_BUILD }}
