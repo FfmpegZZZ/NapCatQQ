@@ -31,6 +31,7 @@ import { WebUiDataRuntime } from '@/webui/src/helper/Data';
 import { napCatVersion } from '@/common/version';
 import { NodeIO3MiscListener } from '@/core/listeners/NodeIO3MiscListener';
 import { sleep } from '@/common/helper';
+import { NapCatMCP } from '@/mcp/server'; // Added MCP import
 
 // NapCat Shell App ES 入口文件
 async function handleUncaughtExceptions(logger: LogWrapper) {
@@ -410,8 +411,21 @@ export class NapCatShell {
     }
     async InitNapCat() {
         await this.core.initCore();
+
+        // Initialize OneBot Adapter
         new NapCatOneBot11Adapter(this.core, this.context, this.context.pathWrapper).InitOneBot()
             .catch(e => this.context.logger.logError('初始化OneBot失败', e));
+
+        // Initialize MCP Handler
+        try {
+            const mcpHandler = new NapCatMCP(this.core);
+            // Store handler if needed later, e.g., this.mcpHandler = mcpHandler;
+            this.context.logger.log('[MCP] MCP Handler initialized successfully.');
+            // Example usage (can be removed later):
+            const selfInfoResource = mcpHandler.handleResourceRequest('napcat://self_info');
+            this.context.logger.logDebug('[MCP] Test fetch napcat://self_info:', JSON.stringify(selfInfoResource));
+        } catch (e) {
+            this.context.logger.logError('初始化MCP失败', e);
+        }
     }
 }
-
