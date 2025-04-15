@@ -59,6 +59,5 @@ _Modern protocol-side framework implemented based on NTQQ._
 
 **本仓库仅用于提高易用性，实现消息推送类功能，此外，禁止任何项目未经仓库主作者授权基于 NapCat 代码开发。使用请遵守当地法律法规，由此造成的问题由使用者和提供违规使用教程者负责。**
 
-## Warnings
-
-[某框架抄袭部分分析](https://napneko.github.io/other/about-copy)
+# MCP
+napcat://self_info
